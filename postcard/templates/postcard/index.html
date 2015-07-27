@@ -1,0 +1,47 @@
+{% extends base_template %}
+
+{% block content %}
+{% load staticfiles %}
+<!-- Links at the top of the page -->
+<div id='links'>
+	<a href= '/' class='button'>Home</a>
+	<a href= '{% url "gallery" %}' class='button'>View Gallery</a>
+	<script src='{% static "postcard/js/webcam.js" %}'></script>
+</div>
+
+<!-- Canvas for holding the webcam stream and snapshots -->
+<div id='container' class='container webcam'>
+	<!-- style='z-index:1;' -->
+	<div id='my_camera' ></div>
+	<canvas id='my_canvas'><script src='{% static "postcard/js/cam_functions.js" %}'></script></canvas>
+	<br>
+</div>
+
+<!-- Editor options -->
+<div id='editor'>
+	{% for item in edit_form %}
+		{{ item }}
+	{% endfor %}
+	<br>
+	<a href='javascript:take_snapshot()' id='snap' class='button shutter'>Take Snapshot</a> <a href='javascript:void(retake_snapshot())' id='retry' class='button shutter'>Try again</a><br>
+</div>
+
+<!-- Submission form -->
+<div id='submission'>
+	<form id='main_form' action='{% url "index" %}' onsubmit='return process_form(event)' method='post' enctype='multipart/form-data'>{% csrf_token %}
+		{% for item in upload_form %}
+			{{ item.label }} {{ item }}
+			{% if forloop.counter > 4 %}
+				<br class='email_text'>
+			{% else %}
+				<br>
+			{% endif %}
+		{% endfor %}
+		<input id='submit_upload' type='submit' value='Submit'>
+	</form>
+</div>
+
+<!-- Scripts -->
+<script src='{% static "postcard/js/editor_functions.js" %}'></script>
+<script src='{% static "postcard/js/form_functions.js" %}'></script>
+{% endblock content %}

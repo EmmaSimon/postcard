@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ title|title }}</title>
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'postcard/style.css' %}">
+		<link rel="icon" href="{% static 'postcard/favicon.png' %}">
+		<meta name="description" content="Create postcards using pictures from your webcam or computer.">
+		<meta name="author" content="Emma Simon">
+	</head>
+	<body>
+		{% block content %}{% endblock content %}
+	</body>
+</html>

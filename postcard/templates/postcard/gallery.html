@@ -1,0 +1,12 @@
+{% extends base_template %}
+
+{% block content %}
+	<a href= '/' class='button'>Home</a>
+	<a href= '{% url 'index' %}' class='button'>Make a postcard</a>
+	<br>
+	<div class='gallery_all'>
+		{% for im in imgs %}
+			<a href="{{ '/media/'|add:im }}" class="gallery"><img src="{{ '/media/'|add:im }}" alt="{{ im }}" style="width:304px;height:228px;"></a>
+		{% endfor %}
+	</div>
+{% endblock content %}

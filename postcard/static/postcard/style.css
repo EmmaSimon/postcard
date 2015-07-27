@@ -1,0 +1,132 @@
+@charset 'UTF-8';
+
+/*General*/
+	body
+	{
+		background-color: #E6E6E6;
+	}
+
+	body,input,textarea,select
+	{
+		font-family: 'Source Sans Pro', sans-serif;
+		font-weight: 300;
+		color: #191919;
+	}
+
+	.button
+	{
+		padding: 0.5em;
+		margin-bottom: 1em;
+		background-color: #B2B2B2;
+		color: #191919;
+		font-weight: 500;
+		text-decoration: none;
+	}
+
+	.button:active
+	{
+		color: #999999;
+	}
+
+	.button:hover
+	{
+		background-color: #CCCCCC;
+	}
+
+	.gallery_all {
+		margin-top: 1em;
+	}
+
+/* Form */
+
+	#editor
+	{
+		padding-bottom: 2em;
+	}
+
+	.email_text
+	{
+		display: none;
+	}
+
+	.image_edit
+	{
+		padding-bottom: 1em;
+		background: #808080;
+		padding: 0.2em;
+		border: solid 0px;
+		margin-bottom: 1em;
+	}
+
+	form input[type="text"],
+	form input[type="email"],
+	form select,
+	form textarea
+	{
+		background: #808080;
+		padding: 0.75em;
+		border: solid 0px;
+		margin-bottom: 0.5em;
+		width: 20%;
+	}
+
+	form input[type="text"]:focus,
+	form select:focus,
+	form textarea:focus
+	{
+		background: #f8f8f8;
+	}
+
+	form input[type="submit"]
+	{
+		border: solid 0px #E6E6E6;*/
+		font-weight: 500;
+		background-color: #B2B2B2;
+		color: #191919;
+		padding: .5em;
+	}
+
+	form input[type="submit"]:hover
+	{
+		background-color: #CCCCCC;
+		cursor: pointer;
+	}
+
+	form input[type="submit"]:active
+	{
+		color: #999999;
+	}
+
+
+
+/* Canvas */
+
+	.container {
+		padding: .5em;
+		margin-top: 0.7em;
+		margin-bottom: 0.5em;
+		position: relative;
+	}
+	.container.webcam {
+		width: 640px;
+		height: 480px;
+	}
+
+	.container:hover {
+		outline: pink groove 0px;
+	}
+	#my_camera,#my_canvas {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	#retry {
+		display: none;
+	}
+
+	#id_outline_color
+	{
+		display:none;
+	}
