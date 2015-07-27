@@ -2,13 +2,22 @@
 window.onload = function() {
 	editor_init();
 	if (camera_on) {cam_init();}
-	document.getElementById('id_snapshot').addEventListener('click', function() {img = get_cam_image();});
-	document.getElementById('id_send_email').addEventListener('change', display_email_options);
-	document.getElementById('id_outline_color').addEventListener("change", edit_image);
-	document.getElementById('id_outline').addEventListener('change', outline_change);
-	document.getElementById('id_text_color').addEventListener('change', edit_image);
-	document.getElementById('id_outline').addEventListener("change", edit_image);
-	document.getElementById('id_text').addEventListener("keyup", edit_image);
+	document.getElementById('my_canvas').addEventListener( 'mouseover', function(event) { mouse_over=true; update_mouse_position(event); edit_image(); } );
+	document.getElementById('my_canvas').addEventListener( 'mouseout', function(event) { mouse_over=false; update_mouse_position(event); edit_image(); } );
+	document.getElementById('my_canvas').addEventListener( 'mousedown', function(event) { mouse_down=true; update_mouse_position(event); edit_image(); } ) ;
+	document.getElementById('my_canvas').addEventListener( 'mouseup', function(event) { mouse_down=false; update_mouse_position(event); edit_image(); } );
+	document.getElementById('my_canvas').addEventListener( 'mousemove', function(event) { update_mouse_position(event); edit_image(); } );
+	
+	document.getElementById('id_font_size').addEventListener( 'change', function() { update_font(document.getElementById('my_canvas')); edit_image(); } );
+	document.getElementById('id_font').addEventListener( 'change', function() { update_font(document.getElementById('my_canvas')); edit_image(); } );
+	document.getElementById('id_outline_color').addEventListener( 'change', edit_image );
+	document.getElementById('id_text_color').addEventListener( 'change', edit_image );
+	document.getElementById('id_outline').addEventListener( 'change', edit_image );
+	document.getElementById('id_text').addEventListener( 'keyup', edit_image );
+
+	document.getElementById('id_send_email').addEventListener( 'change', display_email_options );
+	document.getElementById('id_outline').addEventListener( 'change', outline_change );
+	
 	window.display_email_options();
 };
 
@@ -16,12 +25,12 @@ window.onload = function() {
 // Checks if the client wants to send an email and displays the email options if they do
 function display_email_options() {
 	if (document.getElementById('id_send_email').checked) {
-		var email_inputs = document.getElementsByClassName("email_text");
+		var email_inputs = document.getElementsByClassName('email_text');
 		for (var i = 0; i < email_inputs.length; i++) {
 			email_inputs[i].style.display = 'inline';
 		}
 	} else {
-		var email_inputs = document.getElementsByClassName("email_text");
+		var email_inputs = document.getElementsByClassName('email_text');
 		for (var i = 0; i < email_inputs.length; i++) {
 			email_inputs[i].style.display = 'none';
 		}
@@ -45,8 +54,8 @@ function process_form(evt) {
 	var bad_input = false;
 
 	// Make sure the image file isn't larger than 2 MB
-	if (document.getElementById('id_image').value != '' && document.getElementById('id_image').files[0].size > 2097152) {
-		alert("The image file you entered is too large. Please try an image that's 2 MB or smaller.");
+	if (camera_on && document.getElementById('id_image').value != '' && document.getElementById('id_image').files[0].size > 2097152) {
+		alert('The image file you entered is too large. Please try an image that\'s 2 MB or smaller.');
 		bad_input = true;
 
 	// If there is both a snapshot and an image upload, let the client know to make sure that's what they meant to do
@@ -57,12 +66,12 @@ function process_form(evt) {
 
 	// If there isn't a snapshot or an image upload, send an alert and don't submit
 	} else if (!snapped && document.getElementById('id_image').value == '') {
-		alert("You haven't taken a snapshot or uploaded an image.");
+		alert('You haven\'t taken a snapshot or uploaded an image.');
 		bad_input = true;
 
 	// If the client checked the email box but didn't provide an email, send an alert and don't submit
 	} else if (document.getElementById('id_send_email').checked && document.getElementById('id_email').value == '') {
-		alert("You didn't enter an email address.");
+		alert('You didn\'t enter an email address.');
 		bad_input = true;
 	}
 

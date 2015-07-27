@@ -1,4 +1,3 @@
-
 from django.core.files.storage import default_storage
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect
@@ -12,7 +11,7 @@ from PIL import Image
 import os
 
 # Set the base HTML template
-base_template = "postcard/base.html"
+base_template = 'postcard/base.html'
 
 def index(request):
 	if request.method == 'POST':
