@@ -1,3 +1,4 @@
+
 from django.core.files.storage import default_storage
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect
@@ -47,7 +48,7 @@ def index(request):
 					postcard.send()
 
 			# If the client has uploaded an image, render the editor so they can add text to it
-			if ('image' in request.FILES and request.FILES['image'] != ''):
+			if ('image' in request.FILES and request.FILES['image'] != '' and request.FILES['image'].size < 2097152):
 				default_storage.location = os.path.join(settings.MEDIA_ROOT, 'private/')
 				save_path = default_storage.save(request.FILES['image'].name, request.FILES['image'])
 				snap = DataURI.from_file(os.path.join(default_storage.location, save_path))
@@ -80,7 +81,6 @@ def index(request):
 		upload_form = ImageUploadForm()
 		edit_form = ImageEditForm()
 		return render(request, 'postcard/index.html', {'title': 'Postcard Creator', 'base_template': base_template, 'upload_form': upload_form, 'edit_form': edit_form})
-
 
 def gallery(request):
 	# Get all the public image paths, then render the gallery with those paths

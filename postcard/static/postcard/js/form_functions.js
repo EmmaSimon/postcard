@@ -43,8 +43,14 @@ function outline_change() {
 function process_form(evt) {
 	evt = evt || window.event();
 	var bad_input = false;
+
+	// Make sure the image file isn't larger than 2 MB
+	if (document.getElementById('id_image').value != '' && document.getElementById('id_image').files[0].size > 2097152) {
+		alert("The image file you entered is too large. Please try an image that's 2 MB or smaller.");
+		bad_input = true;
+
 	// If there is both a snapshot and an image upload, let the client know to make sure that's what they meant to do
-	if (camera_on && snapped && document.getElementById('id_image').value != '') {
+	} else if (camera_on && snapped && document.getElementById('id_image').value != '') {
 		if (!confirm('It looks like you took a webcam snapshot and chose an image from your computer. They will both be submitted if you click ok.')) {
 			bad_input = true;
 		}
@@ -53,10 +59,9 @@ function process_form(evt) {
 	} else if (!snapped && document.getElementById('id_image').value == '') {
 		alert("You haven't taken a snapshot or uploaded an image.");
 		bad_input = true;
-	}
 
-	// If the client checked the email box but didn't prrovide an email, send an alert and don't submit
-	if (document.getElementById('id_send_email').checked && document.getElementById('id_email').value == '') {
+	// If the client checked the email box but didn't provide an email, send an alert and don't submit
+	} else if (document.getElementById('id_send_email').checked && document.getElementById('id_email').value == '') {
 		alert("You didn't enter an email address.");
 		bad_input = true;
 	}

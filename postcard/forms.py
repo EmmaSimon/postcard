@@ -26,7 +26,6 @@ class ImageEditForm(forms.Form):
 	outline = forms.ChoiceField(widget=forms.Select(attrs={'class':'image_edit'}), choices=line_styles)
 	outline_color = forms.ChoiceField(widget=forms.Select(attrs={'class':'image_edit'}), choices=colors)
 
-
 # Form for uploading images
 class ImageUploadForm(forms.Form):
 	image = forms.ImageField(label='Upload an image: ', required=False)
@@ -35,4 +34,4 @@ class ImageUploadForm(forms.Form):
 	email = forms.EmailField(label='', required=False, widget=forms.EmailInput(attrs={'placeholder':'Email of recipient', 'class':'email_text'}))
 	email_subject = forms.CharField(label='', required=False, max_length=78, widget=forms.TextInput(attrs={'placeholder':'Subject', 'class':'email_text'}))
 	email_message = forms.CharField(label='', required=False, widget=forms.Textarea(attrs={'placeholder':'Message', 'class':'email_text'}))
-	snapshot = forms.CharField(label='', required=False, max_length=10485760, widget=forms.Textarea(attrs={'style':'display:none'}))
+	snapshot = forms.CharField(label='', required=False, max_length=5242880, widget=forms.Textarea(attrs={'style':'display:none'}))
