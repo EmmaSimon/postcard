@@ -2,6 +2,7 @@ var img;
 var my_c;
 var my_ctx;
 
+
 // Initialize editor image and canvas
 function editor_init() {
 	// Only do this if it's being called from the editor
@@ -9,14 +10,15 @@ function editor_init() {
 		snapped = true;
 		camera_on = false;
 		img = new Image;
-		img.src = document.getElementById('id_snapshot').value;
+		img.src = document.getElementById('id_snapshot').value; //.replace(/data.*base64,/, '');
 		my_c = document.getElementById('my_canvas');
 		my_c.width = parseInt(document.getElementById('my_canvas').style.width, 10);
 		my_c.height = parseInt(document.getElementById('my_canvas').style.height, 10)
 		my_ctx = my_c.getContext('2d');
-		my_ctx.drawImage( img, 0, 0 );
+		edit_image();
 	}
 };
+
 
 // Render all canvas effects
 function edit_image() {
@@ -37,7 +39,10 @@ function edit_image() {
 		var text_y = my_c.height - parseInt(my_c.width/50);
 		temp_context.font = parseInt(my_c.height/8) + 'px Arial';
 
-		// Process tex
+		// Draw the base image befor the text, to avoid stacking text
+		my_ctx.drawImage( img, 0, 0 );
+
+		// Process text style
 		if (document.getElementById('id_text') != null) {
 			text = document.getElementById('id_text').value;
 
@@ -77,14 +82,13 @@ function edit_image() {
 				temp_context.fillText( text, text_x, text_y );
 				temp_context.strokeText( text, text_x, text_y );
 			}
-		}
 
-		// Draw the base image then the text, to avoid stacking text
-		my_ctx.drawImage( img, 0, 0 );
-		my_ctx.drawImage( temp_canvas, 0, 0 );
-		return temp_canvas;
+			// Draw the text canvas over the image
+			my_ctx.drawImage( temp_canvas, 0, 0 );
+		}
 	}
 }
+
 
 // Creates a rainbow gradient then sets it to both fill and stroke
 function rainbowize( canvas, x, y ) {

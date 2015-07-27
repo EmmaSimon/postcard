@@ -8,6 +8,7 @@ var my_ctx=my_c.getContext('2d');
 var width;
 var height;
 
+
 // Initialize camera width and height values
 function cam_init() {
 	width = parseInt(document.getElementById('my_camera').style.width, 10);
@@ -15,6 +16,7 @@ function cam_init() {
 	my_c.width = width;
 	my_c.height = height;
 }
+
 
 // Takes a snapshot from the live webcam feed
 function take_snapshot() {
@@ -28,6 +30,7 @@ function take_snapshot() {
 	 	cam_image.getContext('2d').drawImage( c, 0, 0 );
 	 	edit_image();
 	} );
+
 	// Hide the webcam stream
 	document.getElementById('my_camera').style.display = 'none';
 	// Hide the button for taking a snapshot and show the one for resetting
@@ -35,9 +38,10 @@ function take_snapshot() {
 	document.getElementById('retry').style.display = 'inline';
 }
 
+
 // Resets the webcam
 function retake_snapshot() {
-	// Initializes the webcam stream
+	// Reinitializes the webcam stream
 	document.getElementById('my_camera').style.display = 'inline';
 	snapped = false;
 	// Clear the canvas so you can see the webcam
@@ -47,6 +51,7 @@ function retake_snapshot() {
 	document.getElementById('snap').style.display = 'inline';
 	document.getElementById('retry').style.display = 'none';
 }
+
 
 // Returns a canvas of the unedited image
 function get_snapshot() {

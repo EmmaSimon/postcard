@@ -12,6 +12,7 @@ window.onload = function() {
 	window.display_email_options();
 };
 
+
 // Checks if the client wants to send an email and displays the email options if they do
 function display_email_options() {
 	if (document.getElementById('id_send_email').checked) {
@@ -27,6 +28,7 @@ function display_email_options() {
 	}
 }
 
+
 // Checks if the client wants different colors for the text and displays a second color picker if they do
 function outline_change() {
 	if (document.getElementById('id_outline').value == 'diff') {
@@ -35,6 +37,7 @@ function outline_change() {
 		document.getElementById('id_outline_color').style.display = 'none';
 	}
 }
+
 
 // Checks that the input is valid and submits the form if it is, prompts the user if it isn't
 function process_form(evt) {
